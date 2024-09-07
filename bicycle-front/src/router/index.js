@@ -11,9 +11,11 @@ import { createRouter, createMemoryHistory } from "vue-router";
 //   history: createWebHistory(import.meta.env.BASE_URL),
 // })
 import HomeView from '../views/Home.vue'
+import RegisterView from '../views/Register.vue'
 
 const routes = [
     { path: '/', component: HomeView },
+    { path: '/register', component: RegisterView },
   ]
 
 
