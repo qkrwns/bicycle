@@ -12,10 +12,12 @@ import { createRouter, createMemoryHistory } from "vue-router";
 // })
 import HomeView from '../views/Home.vue'
 import RegisterView from '../views/Register.vue'
+import ChattingView from '../views/Chatting.vue'
 
 const routes = [
-  { path: '/', name: 'home', component: () => import('../views/Register.vue') },
+  { path: '/', name: 'home', component: () => import('../views/Chatting.vue') },
     { path: '/register', name: 'register', component: () => import('../views/Register.vue') },
+      {path: '/chatting', name: 'chatting', component: () => import('../views/Chatting.vue')},
   ]
 
   const router = createRouter({
