@@ -15,7 +15,7 @@ import RegisterView from '../views/Register.vue'
 import ChattingView from '../views/Chatting.vue'
 
 const routes = [
-  { path: '/', name: 'home', component: () => import('../views/Register.vue') },
+  { path: '/', name: 'home', component: () => import('../views/Home.vue') },
     { path: '/register', name: 'register', component: () => import('../views/Register.vue') },
       {path: '/chatting', name: 'chatting', component: () => import('../views/Chatting.vue')},
   ]
