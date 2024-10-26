@@ -2,6 +2,7 @@
 
 <script>
   import axios from 'axios';
+  
   export default {
   name: 'App',
   data(){
@@ -14,14 +15,15 @@
   },
   methods:{
     send(){//localhost 주소 + api
-      axios.post('http://127.0.0.1:5000/losts', {
+      axios.post('/api/losts', {
         bicycle: this.bicycle,
         location: this.location,
         lost_date: this.lost_date,
         content: this.content,
 
       }).then(response => {
-        console.log(response)
+        console.log(this.$router)
+        this.$router.push('/')
       })
     }
     
@@ -81,8 +83,7 @@
         ></v-textarea>
       </v-col>
 
-      
-        <v-btn @click.prevent='send' type="submit" block
+        <v-btn @click="send" block
                 class="bg-success py-6 text-h5 font-weight-bold mt-4 elevation-6">
            등록
         </v-btn>

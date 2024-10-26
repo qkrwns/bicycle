@@ -11,14 +11,17 @@
     methods : {
       async fetchLosts() {
         try {
-          const res = await axios.get('/losts');
+          const res = await axios.get('/api/losts');
           this.losts = res.data;
         } catch (error) {
           console.log(error)
         }
       }
-    }
-  }
+    },
+    
+
+
+ }
 </script>
 <style>
 
@@ -47,11 +50,11 @@
                 </v-card-title>
 
                 <div class="mx-5 d-flex justify-center text-h6">
-                  자전거:{{lost.bicycle}}
+                  자전거: {{lost.bicycle}}
                   <br>
-                  {{lost.location}}
+                  위치: {{lost.location}}
                   <br>
-                  {{lost.lost_date}}
+                  시간: {{lost.lost_date}}
                   <br>
                   {{lost.content}}
                 </div>
@@ -60,7 +63,7 @@
                   2024-9-7 13:55
                 </v-card-actions>
                                 <div class="d-flex justify-end mx-2">
-                  <v-btn>채팅하기</v-btn>
+                  <v-btn><router-link v-bind:to="'/chatting/' + lost.id">채팅하기</router-link></v-btn>
                 </div>  
         <v-expand-transition>
       <div v-if="expand">
@@ -95,7 +98,7 @@
                   2024-9-7 13:55
                 </v-card-actions>
                 <div class="d-flex justify-end mx-2">
-                  <button type="button" class="sign-up-button" onclick="location.href='chatting'">채팅하기</button>
+                   <v-btn @click="tochat">채팅하기</v-btn>
                 </div>  
         <v-expand-transition>
       <div v-if="expand">

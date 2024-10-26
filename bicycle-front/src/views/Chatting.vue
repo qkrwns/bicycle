@@ -1,9 +1,47 @@
 <script>
-export default {
-    data: () => ({
-      expand: false,
-    }),
+import axios from 'axios';
+
+// export default {
+//     data: () => ({
+//       expand: false,
+//     }),
+//   }
+
+  export default {
+  name: 'App',
+  data(){
+    return{      
+      content:'',
+      type: '',
+    }
+  },
+    mounted(){
+      this.fetchChattings();
+    },
+  methods:{
+    async fetchChattings() {
+        try {
+          console.log(this.$route.params.lost_id);
+          const res = await axios.get('/api/losts/'+this.$route.params.lost_id + '/chattings');
+          this.chatting = res.data;
+        } catch (error) {
+          console.log(error)
+        }
+    },
+    send(){//localhost 주소 + api
+      axios.post('/api/chattings', {
+        content: this.content,
+        type: 1,
+        
+
+      }).then(response => {
+        console.log(response)
+      })
+    }
+    
   }
+}
+
 </script>
 <style>
   .chatting-box {
@@ -34,8 +72,8 @@ export default {
           <div class="bg-yellow chatting-box you">1</div>
           <div class="bg-yellow chatting-box me">1</div>
         </div>
-        <v-textarea class="mt-1" label="메세지를 입력하시오."></v-textarea>
-        <v-btn>전송</v-btn>
+        <v-textarea class="mt-1" label="메세지를 입력하시오." name="content" v-model="content"></v-textarea>
+        <v-btn @click.prevent='send' type="submit">전송</v-btn>
            
     </v-container>
 </template>
