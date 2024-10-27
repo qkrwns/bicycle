@@ -23,24 +23,43 @@
 
  }
 </script>
-<style>
-
+<style scoped>
+  .main {
+    postion: relative;
+  }
+  button.floatting-btn {
+    position: fixed;
+    bottom: 42px;
+    right: 30px;
+    border-radius: 50%;
+    width: 64px;
+    height: 64px !important;
+    z-index: 9999;
+  }
+  .floatting-btn a{
+    color: #000;
+    text-decoration: none;
+  }
 </style>
 
 <template>
+
   <v-card
     class="mx-auto"
     max-width="640"
   >
-    <v-layout>
+
+    <v-layout  class="main">
 
       <v-app-bar>
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
         <v-toolbar-title>분실목록</v-toolbar-title>
       </v-app-bar>
-
       <v-main>
+       <v-btn class="floatting-btn">
+        <router-link to="/register">등록</router-link>
+       </v-btn>
         <v-container>
           <v-row dense>
             <v-col v-for="lost in losts":key="lost.id" cols="12"> 
