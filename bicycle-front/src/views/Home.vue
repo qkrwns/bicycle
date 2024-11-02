@@ -19,7 +19,7 @@
         }
       },
       goChatting(id) {
-        const password = window.prompt('123');
+        const password = window.prompt('비밀번호를 입력하시오(작성자가 아니라면 아무 숫자나입력)');
         console.log(password);
         this.$router.push({ path: '/chatting/' + id, state: {password}})
       }
