@@ -11,6 +11,7 @@
       lost_date: '',
       content: '',
       location: '',
+      password: '',
     }
   },
   methods:{
@@ -20,6 +21,7 @@
         location: this.location,
         lost_date: this.lost_date,
         content: this.content,
+        password: this.password,
 
       }).then(response => {
         console.log(this.$router)
@@ -82,7 +84,19 @@
           v-model="content"
         ></v-textarea>
       </v-col>
-
+      <v-row>
+      <v-col cols="2">
+        <v-list-subheader class="text-h6 ma-0">비밀번호</v-list-subheader>
+      </v-col>
+      
+      <v-col cols="6" offset="0">
+      <v-text-field
+        name="password"
+        v-model="password"
+        class="ma--1"
+      ></v-text-field>
+      </v-col>
+      </v-row>
         <v-btn @click="send" block
                 class="bg-success py-6 text-h5 font-weight-bold mt-4 elevation-6">
            등록
