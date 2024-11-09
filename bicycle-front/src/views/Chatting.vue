@@ -82,7 +82,6 @@ import axios from 'axios';
 
 <template>
     <v-container>
-        <v-btn  class="button mb-5 "><router-link to="/"><</router-link></v-btn>
         <div class=" bg-deep-purple-lighten-5 d-flex align-center pa-5 text-h4 font-weight-black bg-white" style="min-height:100px; width:100%;">
             <v-avatar image="https://w7.pngwing.com/pngs/710/71/png-transparent-profle-person-profile-user-circle-icons-icon-thumbnail.png" size="60"></v-avatar>&nbsp&nbsp**님과의 채팅
           </div>

@@ -1,41 +1,70 @@
 
 
-<script>
+<script setup>
   import axios from 'axios';
-  
-  export default {
-  name: 'App',
-  data(){
-    return{      
-      bicycle:'',
-      lost_date: '',
-      content: '',
-      location: '',
-      password: '',
-    }
-  },
-  methods:{
-    send(){//localhost 주소 + api
-      axios.post('/api/losts', {
-        bicycle: this.bicycle,
-        location: this.location,
-        lost_date: this.lost_date,
-        content: this.content,
-        password: this.password,
+  import { ref } from 'vue';
+  import { useKakao } from 'vue3-kakao-maps/@utils';
+  import { KakaoMap, KakaoMapMarker } from 'vue3-kakao-maps';
+import { useRoute, useRouter } from 'vue-router'
 
-      }).then(response => {
-        console.log(this.$router)
-        this.$router.push('/')
-      })
+const router = useRouter()
+useKakao('dce85f31b935dbfca1bf021b26706b9d');
+
+const map = ref();
+
+const message = ref('');
+
+const coordinate = ref({
+  lat: 37,
+  lng: 31,
+});
+const bicycle = ref('')
+const content = ref('')
+const location = ref('')
+const password = ref('')
+const lost_date = ref('')
+const onLoadKakaoMap = (mapRef) => {
+
+  map.value = mapRef;
+
+
+  kakao.maps.event.addListener(map.value, 'click', function (mouseEvent) {
+
+    // 클릭한 위도, 경도 정보를 가져옵니다
+
+    const latlng = mouseEvent.latLng;
+    coordinate.value = {
+      lat: latlng.getLat(),
+      lng: latlng.getLng()
     }
-    
+    console.log(coordinate.value)
+
+  });
+
+};
+
+function send(){//localhost 주소 + api
+    console.log(coordinate.value.lat)
+      axios.post('/api/losts', {
+        bicycle: bicycle.value,
+        location: location.value,
+        lost_date: lost_date.value,
+        content: content.value,
+        password: password.value,
+        lat: coordinate.value.lat,
+        lng: coordinate.value.lng,
+      }).then(response => {
+        console.log(router)
+        router.push('/')
+      })
   }
-}
 </script>
 <style>
 </style>
 
 <template>
+
+
 <h1 class="pa-5">자전거 분실 등록 페이지</h1>
    <v-container fluid>
       <form method="POST" action="/">
@@ -56,11 +85,18 @@
       </v-col>
 
       <v-col cols="12">
+ <KakaoMap :lat=" 37.566535" :lng="126.977969" @onLoadKakaoMap="onLoadKakaoMap" style="width:100%;" class="mb-5">
+    <KakaoMapMarker :lat="coordinate.lat" :lng="coordinate.lng"></KakaoMapMarker>
+  </KakaoMap> 
         <v-text-field
           name="location" v-model="location"
+          placeholder="주소에 대한 상세한 설명"
         ></v-text-field>
-      </v-col>
-    
+      </v-col>   
+
+
+
+
       <v-col cols="6">
         <v-list-subheader  class="text-h6">잃어버린 시간</v-list-subheader>
       </v-col>
